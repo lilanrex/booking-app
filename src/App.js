@@ -4,8 +4,9 @@ import {
   Route,
 } from "react-router-dom";
 
-import Home from "./components/home/Home";
-import List from "./components/list/list";
+import Home from "./pages/home/Home";
+import List from "./pages/list/list";
+import Hotel from "./pages/hotel/Hotel";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
    <Routes>
      <Route path="/" element={<Home />} />
      <Route path="/hotels" element={<List />} />
+     <Route path="/hotels/:id" element={<Hotel />} />
    </Routes>
   </BrowserRouter>
   );
