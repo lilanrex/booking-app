@@ -2,6 +2,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  HashRouter
 } from "react-router-dom";
 
 import Home from "./pages/home/Home";
