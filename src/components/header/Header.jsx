@@ -7,7 +7,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns";
 
-function Header () {
+function Header (props) {
 
   const[openDate,setOpenDate] = useState(false);
 
@@ -19,11 +19,26 @@ function Header () {
  }
 ]);
 
+ const [openOptions, setOpenOptions] = useState(false);
+ const [options, setOptions] = useState({
+   adult:1,
+   children:0,
+   room:1
+ });
+
+ const handleOption =  function (name, operation) {
+       setOptions(function(prev){
+         return {
+            ...prev,
+            [name]: operation ==="i" ? options[name] +1 : options[name] -1,
+         }
+       }); 
+ }  
 
 
     return (
     <div className="header">
-     <div className="headerContainer">
+     <div className={props.type === "List"? "headerContainer listMode" : "headerContainer"}>
       <div className="headerList">
         <div className="headerListItem active">
          <FontAwesomeIcon icon={faBed} />
@@ -46,6 +61,8 @@ function Header () {
           <span>Airport Taxis</span>
         </div>   
        </div>
+       { props.type !== "List" &&
+        <>
        <h1 className="headerTitle">A lifetime of discounts? It's Genius</h1>
        <p className="headerDesc">
           Get rewarded for your travels, unlock instant savings of 30% or more
@@ -81,16 +98,75 @@ function Header () {
           </div> 
           <div className="headerSearchItem">
              <FontAwesomeIcon icon={faPerson} className="headerIcon" />
-             <span className="headerSearchText">
-              2 adults 2 children 1 room
+             <span onClick={function(){
+                setOpenOptions(!openOptions);
+             }}
+             className="headerSearchText">
+             {`${options.adult} adult . ${options.children} children . ${options.room} room`}
            </span>
-          </div> 
+           {openOptions && <div className="options">
+              <div className="optionItem">
+                 <span className="optionText">
+                    Adult
+                 </span>
+                 <div className="optionCounter">
+                   <button disabled={options.adult <= 1}
+                   className="optionCounterButton" onClick={function () {
+                      handleOption("adult","d");
+                     }}
+                    >-</button>
+                   <span className="optionCounterNumber">{options.adult}</span>
+                   <button className="optionCounterButton" onClick={function () {
+                      handleOption("adult","i");
+                     }}
+                    >+</button>
+                 </div>
+                </div>
+                <div className="optionItem">
+                 <span className="optionText">
+                    Children
+                 </span>
+                 <div className="optionCounter">
+                   <button disabled={options.children <= 0}
+                   className="optionCounterButton" 
+                   onClick={function () {
+                      handleOption("children","d");
+                     }}
+                    >-</button>
+                   <span className="optionCounterNumber">{options.children}</span>
+                   <button className="optionCounterButton" onClick={function () {
+                      handleOption("children","i");
+                     }}
+                   >+</button>
+                 </div>
+                </div>
+                <div className="optionItem">
+                 <span className="optionText">
+                    Room
+                 </span>
+                 <div className="optionCounter">
+                   <button disabled={options.room <= 1}
+                   className="optionCounterButton" onClick={function () {
+                      handleOption("room","d");
+                     }} 
+                   >-</button>
+                   <span className="optionCounterNumber">{options.room}</span>
+                   <button className="optionCounterButton"  onClick={function () {
+                      handleOption("room","i");
+                     }} 
+                    >+</button>
+                 </div>
+                </div>
+              </div>}
+          </div>
           <div className="headerSearchItem">
              <button className="headerBtn">
                Search
              </button>
           </div> 
        </div>
+       </>
+       }
       </div>   
     </div>
     );
