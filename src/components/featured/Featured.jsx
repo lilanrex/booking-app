@@ -24,7 +24,9 @@ return(
            className="featuredImg" />
            <div className="featuredTitles">
               <h1>Austin</h1>
-              <h2>763 properties</h2>
+              <h2>
+              763 properties
+              </h2>
            </div>
         </div>
     </div>
