@@ -6,6 +6,7 @@ import {useState} from "react";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 function Header (props) {
 
@@ -26,6 +27,8 @@ function Header (props) {
    room:1
  });
 
+ const navigate = useNavigate();
+
  const handleOption =  function (name, operation) {
        setOptions(function(prev){
          return {
@@ -34,6 +37,12 @@ function Header (props) {
          }
        }); 
  }  
+
+
+  function handleSearch () {
+       navigate("/hotels");
+  }
+
 
 
     return (
@@ -160,7 +169,7 @@ function Header (props) {
               </div>}
           </div>
           <div className="headerSearchItem">
-             <button className="headerBtn">
+             <button className="headerBtn" onClick={handleSearch}>
                Search
              </button>
           </div> 
