@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 import "./list.css";
 import {format} from "date-fns";
 import { DateRange } from "react-date-range";
+import SearchItem from "../../components/seachItem/SearchItem";
 
 function List() {
 
@@ -41,6 +42,7 @@ function List() {
             </div>
             <div className="lsItem">
                 <label>Options</label>
+                <div className="lsOptions">
                 <div className="lsOptionItem">
                  <span className="lsOptionText">Min price <small>per night</small> </span>
                  <input className="lsOptionInput" type="number"/>
@@ -62,9 +64,22 @@ function List() {
                  <span className="lsOptionText">Room  </span>
                  <input className="lsOptionInput" type="number" placeholder={options.room}/>
                 </div>
+                </div>
             </div>
+            <button>Search</button>
           </div>
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+          </div>
         </div>
       </div>
     </div>
